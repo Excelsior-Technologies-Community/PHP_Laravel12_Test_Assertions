@@ -1,59 +1,421 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# PHP_Laravel12_Test_Assertions
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
 
-## About Laravel
+## Project Description
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+PHP_Laravel12_Test_Assertions is a simple Laravel 12 project that demonstrates how to use the Laravel Test Assertions package to write clean and effective automated tests.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+The project focuses on testing:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Route behavior
 
-## Learning Laravel
+- Form Request validation
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+- Controller integration
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+By using this package, developers can easily verify that their application follows best practices without writing complex test cases.
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Features
 
-### Premium Partners
+- Laravel 12 project setup
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+- Integration of Test Assertions package
 
-## Contributing
+- Route testing using assertRouteUsesFormRequest
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- Validation rules testing using assertExactValidationRules
 
-## Code of Conduct
+- Clean separation of validation using FormRequest
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- Simple controller-based API response
 
-## Security Vulnerabilities
+- Beginner-friendly test examples
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Technologies Used
+
+1. PHP 8+ – Backend programming language
+
+2. Laravel 12 – PHP web framework
+
+3. MySQL (optional) – Database
+
+4. PHPUnit – Testing framework
+
+5. Laravel Test Assertions Package – Advanced testing helpers
+
+
+
+---
+
+
+
+## Installation Steps
+
+
+---
+
+
+## STEP 1: Create Laravel 12 Project
+
+### Open terminal / CMD and run:
+
+```
+composer create-project laravel/laravel PHP_Laravel12_Test_Assertions "12.*"
+
+```
+
+### Go inside project:
+
+```
+cd PHP_Laravel12_Test_Assertions
+
+```
+
+#### Explanation:
+
+This command installs a fresh Laravel 12 project using Composer and creates a new project folder. 
+
+The cd command moves you into the project directory to start development.
+
+
+
+
+## STEP 2: Database Setup (Optional)
+
+### Update database details:
+
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel12_Test_Assertions
+DB_USERNAME=root
+DB_PASSWORD=
+
+```
+
+### Create database in MySQL / phpMyAdmin:
+
+```
+Database name: laravel12_Test_Assertions
+
+```
+
+### Then Run:
+
+```
+php artisan migrate
+
+```
+
+
+#### Explanation:
+
+This step connects Laravel to a MySQL database. 
+
+Running migrations creates default tables like users and jobs.
+
+
+
+
+
+## STEP 3: Install Test Assertions Package
+
+### Install package:
+
+```
+composer require --dev jasonmccreary/laravel-test-assertions
+
+```
+
+
+#### Explanation:
+
+This installs the Laravel Test Assertions package, which provides helpful methods to test routes, validation rules, and controller behavior
+
+
+
+
+
+
+## STEP 4: Update TestCase.php
+
+### Open tests/TestCase.php and add the trait AdditionalAssertions:
+
+```
+<?php
+
+namespace Tests;
+
+use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use JMac\Testing\Traits\AdditionalAssertions;
+
+abstract class TestCase extends BaseTestCase
+{
+    use AdditionalAssertions;
+
+    /**
+     * Creates the application.
+     *
+     * @return \Illuminate\Foundation\Application
+     */
+    public function createApplication(): \Illuminate\Foundation\Application
+    {
+        $app = require __DIR__ . '/../bootstrap/app.php';
+        $app->make(\Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+
+        return $app;
+    }
+}
+
+```
+
+#### Explanation:
+
+This step adds the AdditionalAssertions trait so you can use advanced testing methods provided by the package.
+
+
+
+
+
+
+## STEP 5: Create Controller & FormRequest
+
+### Create Product Controller
+
+```
+php artisan make:controller ProductController
+
+```
+
+### File: app/Http/Controllers/ProductController.php
+
+```
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\StoreProductRequest;
+use Illuminate\Http\JsonResponse;
+
+class ProductController extends Controller
+{
+    public function store(StoreProductRequest $request): JsonResponse
+    {
+        // Normally, save product to DB
+        return response()->json(['success' => true]);
+    }
+
+    
+}
+
+```
+
+#### Explanation:
+
+This creates a controller to handle product-related requests.
+
+
+
+
+### Create FormRequest
+
+```
+php artisan make:request StoreProductRequest
+
+```
+
+### File: app/Http/Requests/StoreProductRequest.php
+
+```
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class StoreProductRequest extends FormRequest
+{
+    public function authorize(): bool
+    {
+        return true; // allow all for demo
+    }
+
+    public function rules(): array
+    {
+        return [
+            'name' => 'required|string',
+            'price' => 'required|numeric|min:1',
+        ];
+    }
+}
+
+```
+
+#### Explanation:
+
+FormRequest is used to handle validation logic separately from the controller.
+
+
+
+
+
+## STEP 6: Add Route
+
+### Edit routes/web.php:
+
+```
+use App\Http\Controllers\ProductController;
+
+Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+
+```
+
+
+#### Explanation:
+
+This defines a POST route that connects the URL /products to the controller method.
+
+
+
+
+
+
+## STEP 7: Create Test Class
+
+### Run:
+
+```
+php artisan make:test ProductTest
+
+```
+
+### File: tests/Feature/ProductTest.php
+
+```
+<?php
+
+namespace Tests\Feature;
+
+use Tests\TestCase;
+
+class ProductTest extends TestCase
+{
+    public function test_store_route_uses_form_request()
+    {
+        $this->assertRouteUsesFormRequest(
+            'products.store',
+            \App\Http\Requests\StoreProductRequest::class
+        );
+    }
+
+    public function test_validation_rules_are_correct()
+    {
+        $expectedRules = [
+            'name' => ['required', 'string'],
+            'price' => ['required', 'numeric', 'min:1'],
+        ];
+
+        $this->assertExactValidationRules(
+            $expectedRules,
+            (new \App\Http\Requests\StoreProductRequest())->rules()
+        );
+    }
+}
+
+```
+
+
+#### Explanation:
+
+This creates a feature test file where we will write test cases for our application.
+
+
+
+
+## STEP 8: Run Tests
+
+### Run: 
+
+```
+php artisan test
+
+```
+
+
+### Expected output (simplified):
+
+```
+OK (3 tests, 3 assertions)
+
+```
+
+#### Explanation:
+
+This command runs all test cases and verifies that your routes and validation rules are working correctly.
+
+
+
+
+
+## STEP 9: Run the App  (Optional)
+
+### Start dev server:
+
+```
+php artisan serve
+
+```
+
+### Open in browser:
+
+```
+http://127.0.0.1:8000
+
+```
+
+#### Explanation:
+
+This starts the local Laravel development server so you can access the application in your browser.
+
+
+
+## Test Output
+
+### Below is the result after running:
+
+```
+php artisan test
+
+```
+
+
+<img src="screenshots/Screenshot 2026-03-19 100532.png" width="900">
+
+
+
+---
+
+## Project Folder Structure:
+
+```
+PHP_Laravel12_Test_Assertions/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   └── ProductController.php
+│   │   └── Requests/
+│   │       └── StoreProductRequest.php
+├── routes/
+│   └── web.php
+├── tests/
+│   ├── Feature/
+│   │   └── ProductTest.php
+│   └── TestCase.php
+├── composer.json
+└── phpunit.xml
+
+```
