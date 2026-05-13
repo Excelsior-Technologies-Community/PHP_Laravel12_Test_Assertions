@@ -43,7 +43,7 @@ class ProductTest extends TestCase
      */
     public function test_product_can_be_created()
     {
-        $response = $this->postJson('/products', [
+        $response = $this->postJson('/api/products', [
             'name' => 'iPhone 15',
             'price' => 90000,
             'category' => 'Mobile',
@@ -65,7 +65,7 @@ class ProductTest extends TestCase
      */
     public function test_validation_fails_when_name_missing()
     {
-        $response = $this->postJson('/products', [
+        $response = $this->postJson('/api/products', [
             'price' => 500,
         ]);
 
@@ -84,7 +84,7 @@ class ProductTest extends TestCase
             'price' => 50000,
         ]);
 
-        $response = $this->getJson('/products');
+        $response = $this->getJson('/api/products');
 
         $response
             ->assertStatus(200)
