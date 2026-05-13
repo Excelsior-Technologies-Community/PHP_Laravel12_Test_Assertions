@@ -8,14 +8,23 @@ class StoreProductRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true; // allow all for demo
+        return true;
     }
 
     public function rules(): array
     {
         return [
-            'name' => 'required|string',
+            'name' => 'required|string|min:3',
             'price' => 'required|numeric|min:1',
+            'category' => 'nullable|string',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Product name is required',
+            'price.required' => 'Product price is required',
         ];
     }
 }
