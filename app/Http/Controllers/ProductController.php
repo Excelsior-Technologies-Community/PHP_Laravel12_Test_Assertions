@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+use Illuminate\Support0\Str;
 
 class ProductController extends Controller
 {
@@ -24,7 +24,7 @@ class ProductController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255|unique:products,name',
             'description' => 'nullable|string',
-            'price' => 'required|numeric|min:0',
+            'price' => 'required|numeric|min:0.01',
             'stock' => 'required|integer|min:0',
             'category' => 'required|string|max:255',
         ]);
@@ -71,7 +71,7 @@ class ProductController extends Controller
         $validated = $request->validate([
             'name' => 'sometimes|string|max:255|unique:products,name,' . $id,
             'description' => 'nullable|string',
-            'price' => 'sometimes|numeric|min:0',
+            'price' => 'sometimes|numeric|min:0.01',
             'stock' => 'sometimes|integer|min:0',
             'category' => 'sometimes|string|max:255',
             'is_active' => 'sometimes|boolean',
